@@ -331,6 +331,8 @@
 		                	$result .= sprintf(get_string('INF_USERCREATE_SUCCESS', self::PLUGIN_NAME), $line_num, $user_id_value);
 	                	}
 	                    //continue;
+	                }else{
+	                	
 	                }
 	
 	                // Fetch all the role assignments this user might have for this course's context
@@ -344,6 +346,7 @@
 	                    } else {
 	                        try {
 	                            $manual_enrol_plugin->enrol_user($enrol_instance, $user_rec->id, $role_id);
+	                            $result .= sprintf(get_string('INF_ENROLL_SUCCESS', self::PLUGIN_NAME), $line_num, $user_id_value);
 	                        }
 	                        catch (Exception $exc) {
 	                            $result .= sprintf(get_string('ERR_ENROLL_FAILED', self::PLUGIN_NAME), $line_num, $user_id_value);

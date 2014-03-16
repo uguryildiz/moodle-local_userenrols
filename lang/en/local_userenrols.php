@@ -77,6 +77,7 @@
     $string['INF_IMPORT_SUCCESS']       = 'User enrollment import successful';
     $string['INF_ASSIGN_SUCCESS']       = 'Group assignment successful';
     $string['INF_USERCREATE_SUCCESS']   = "Line %u: New user created '%s'\n";
+    $string['INF_ENROLL_SUCCESS']   	= "Line %u: User enroll '%s'\n";
 
     $string['ERR_NO_MANUAL_ENROL']      = "Course must have Manual enrol plugin enabled.";
     $string['ERR_NO_META_ENROL']        = "Course must have 'Course meta link' enrol plugin enabled.";
