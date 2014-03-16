@@ -317,12 +317,12 @@
 	                	$user->lang = "tr";
 	                	$user->city = "KOCAELİ";
 	                	$user->country = "TR";	                	
-	                	//$user->id = $DB->insert_record('user', $user);
+	                	$user->id = $DB->insert_record('user', $user);
 	                	
 	                	//$user_rec = $DB->get_record('user', array($id_field => addslashes($user_id_value)));
 	                	
 	                	$result .= sprintf(get_string('ERR_USERID_INVALID', self::PLUGIN_NAME), $line_num, $user_id_value);
-	                	$result .= print_r($user);
+	                	//$result .= print_r($user);
 	                    continue;
 	                }
 	
