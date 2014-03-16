@@ -81,13 +81,13 @@
             navigation_node::TYPE_SETTING,
             get_string('IMPORT_MENU_SHORT', local_userenrols_plugin::PLUGIN_NAME),
             null, new pix_icon('i/import', 'import'));
-
+		/*
         $useradmin_node->add(
             get_string('ASSIGN_MENU_LONG', local_userenrols_plugin::PLUGIN_NAME),
             local_userenrols_plugin::get_plugin_url('assign', $context->instanceid),
             navigation_node::TYPE_SETTING,
             get_string('ASSIGN_MENU_SHORT', local_userenrols_plugin::PLUGIN_NAME),
-            null, new pix_icon('t/move', 'assign'));
+            null, new pix_icon('t/move', 'assign')); */
 
     }
 
@@ -309,11 +309,11 @@
                 	$user->password = md5($user_id_value);
                 	$user->lastname = $lastname;
                 	$user->firstname = $firstname;
-                	$user->id = $DB->insert_record('user', $user);
+                	//$user->id = $DB->insert_record('user', $user);
                 	
-                	$user_rec = $DB->get_record('user', array($id_field => addslashes($user_id_value)));
+                	//$user_rec = $DB->get_record('user', array($id_field => addslashes($user_id_value)));
                 	
-                	//$result .= sprintf(get_string('ERR_USERID_INVALID', self::PLUGIN_NAME), $line_num, $user_id_value);
+                	$result .= sprintf(get_string('ERR_USERID_INVALID', self::PLUGIN_NAME), $line_num, $user_id_value);
                     continue;
                 }
 
