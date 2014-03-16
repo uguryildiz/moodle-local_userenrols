@@ -32,15 +32,15 @@
     defined('MOODLE_INTERNAL') || die();
 
 
-    $string['pluginname']               = 'Kullancı Yükleme, Kaydetme & Grup Atamaları';
+    $string['pluginname']               = 'Kullanıcı Yükleme, Kaydetme & Grup Atamaları';
 
-    $string['IMPORT_MENU_LONG']         = 'Kullancı Yükle';
+    $string['IMPORT_MENU_LONG']         = 'Kullanıcı Yükle';
     $string['IMPORT_MENU_SHORT']        = 'Yükle';
 
     $string['ASSIGN_MENU_LONG']         = 'Grup (Meta)';
     $string['ASSIGN_MENU_SHORT']        = 'Grup Bilgileri';
 
-    $string['LBL_IMPORT_TITLE']         = 'CSV Kullanıcı Yükleme ve Kaydetme';
+    $string['LBL_IMPORT_TITLE']         = 'Kullanıcı Yükleme ve Kaydetme';
     $string['LBL_ASSIGN_TITLE']         = 'Group Assignment by Metacourse';
 
     $string['LBL_IMPORT']               = 'Yükle';
@@ -51,16 +51,16 @@
     $string['LBL_ROLE_ID']              = 'Rol:';
     $string['LBL_ROLE_ID_help']         = 'What role do you want the imported users to have in the course. If \'No Enrollment\' then only group assignments will be made.';
     $string['LBL_FILE_help']            = 'Upload or pick from a repository a delimited data file with user and optional group information. File should have either a .txt or .csv extension.';
-    $string['LBL_USER_ID_FIELD']        = 'Kullanıcı alanı:';
+    $string['LBL_USER_ID_FIELD']        = 'Kimlik Tanımlayıcısı:';
     $string['LBL_USER_ID_FIELD_help']   = 'Specify field in the user record is represented in the first column of the import file.';
-    $string['LBL_GROUP']                = 'Gruplara atama yap:';
+    $string['LBL_GROUP']                = 'Grup ataması yapılsın mı?:';
     $string['LBL_GROUP_help']           = 'Make groups assignments, either based on file input, or a selected group.';
-    $string['LBL_GROUP_ID']             = 'Grup kullan:';
+    $string['LBL_GROUP_ID']             = 'Kaydedilecek Grup:';
     $string['LBL_GROUP_ID_help']        = 'Choose to use the group name in input file, if supplied, or select an existing group and ignore the input data.';
-    $string['LBL_GROUP_CREATE']         = 'Grupları oluştur:';
+    $string['LBL_GROUP_CREATE']         = 'Gerekirse gruplar oluşturulsun mu?:';
     $string['LBL_GROUP_CREATE_help']    = 'If groups in import file do not exist, create new ones as needed, otherwise only assign users to groups if the group name specified already exists.';
-    $string['LBL_NO_ROLE_ID']           = 'No Enrollments';
-    $string['LBL_NO_GROUP_ID']          = 'Dosyadaki bilgiyi kullan';
+    $string['LBL_NO_ROLE_ID']           = 'Rol Ataması Yapma';
+    $string['LBL_NO_GROUP_ID']          = 'Dosyadaki grup bilgisini kullan';
 
     $string['LBL_ASSIGN']               = 'Atama yap';
     $string['LBL_ASSIGN_TO']            = 'Gruba ata:';
@@ -76,13 +76,13 @@
     $string['INF_METACOURSE_WARN']      = '<b>WARNING</b>: You can not import enrollments directly into a metacourse. Instead, make enrollments into one of its child courses.<br /><br />';
     $string['INF_IMPORT_SUCCESS']       = 'Kullanıcı yükleme ve kaydetme gerçekleştirildi';
     $string['INF_ASSIGN_SUCCESS']       = 'Grup atamaları gerçekleştirildi';
-    $string['INF_USERCREATE_SUCCESS']   = "Line %u: Yeni kullanıcı oluşturuldu '%s'\n";
-    $string['INF_ENROLL_SUCCESS']   	= "Line %u: Kullanıcı derse kaydedildi '%s'\n";
+    $string['INF_USERCREATE_SUCCESS']   = "Satır %u: Yeni kullanıcı oluşturuldu '%s'\n";
+    $string['INF_ENROLL_SUCCESS']   	= "Satır %u: Kullanıcı derse kaydedildi '%s'\n";
 
     $string['ERR_NO_MANUAL_ENROL']      = "Course must have Manual enrol plugin enabled.";
     $string['ERR_NO_META_ENROL']        = "Course must have 'Course meta link' enrol plugin enabled.";
     $string['ERR_PATTERN_MATCH']        = "Satır %u: dosya içeriği okunamadı '%s'\n";
-    $string['ERR_USERNAME_MATCH']       = "Satır %u: kullanıcı adı okunama '%s'. Kullanıcı Adı 9 haneli rakam olmalıdır.\n";
+    $string['ERR_USERNAME_MATCH']       = "Satır %u: kullanıcıadı  (username)  okunamadı '%s'. Kullanıcıadı (username) 9 haneli rakam olmalıdır.\n";
     $string['ERR_INVALID_GROUP_ID']     = "The group id %u is invalid for this course.\n";
     $string['ERR_USERID_INVALID']       = "Satır %u: Invalid userid value '%s'\n";
     $string['ERR_ENROLL_FAILED']        = "Satır %u: Unable to create role assignment for userid '%s'\n";
