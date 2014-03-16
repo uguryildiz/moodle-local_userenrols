@@ -268,21 +268,6 @@
             $user_rec     =
             $new_group    =
             $new_grouping = null;
-
-            $user = new StdClass();
-            $user->auth = 'manual';
-            $user->confirmed = 1;
-            $user->mnethostid = 1;
-            $user->email = "test@kocaeli.edu.tr";
-            $user->username = "090807060";
-            $user->password = md5('090807060');
-            $user->lastname = "Test";
-            $user->firstname = "Test";
-            $user->idnumber = "090807060";
-            $user->lang = "tr";
-            $user->city = "KOCAELİ";
-            $user->country = "TR";
-            $user->id = $DB->insert_record('user', $user);
             
             // Open and fetch the file contents
             $fh = $import_file->get_content_file_handle();
@@ -323,12 +308,12 @@
 	                	$user->auth = 'manual';
 	                	$user->confirmed = 1;
 	                	$user->mnethostid = 1;
-	                	$user->email = "$user_id_value@kocaeli.edu.tr";
-	                	$user->username = "$user_id_value";
-	                	$user->password = md5('$user_id_value');
-	                	$user->lastname = "$lastname";
-	                	$user->firstname = "$firstname";
-	                	$user->idnumber = "$user_id_value";
+	                	$user->email = $user_id_value."@kocaeli.edu.tr";
+	                	$user->username = $user_id_value;
+	                	$user->password = md5($user_id_value);
+	                	$user->lastname = $lastname;
+	                	$user->firstname = $firstname;
+	                	$user->idnumber = $user_id_value;
 	                	$user->lang = "tr";
 	                	$user->city = "KOCAELİ";
 	                	$user->country = "TR";	                	
@@ -337,6 +322,7 @@
 	                	//$user_rec = $DB->get_record('user', array($id_field => addslashes($user_id_value)));
 	                	
 	                	$result .= sprintf(get_string('ERR_USERID_INVALID', self::PLUGIN_NAME), $line_num, $user_id_value);
+	                	$result .= print_r($user);
 	                    continue;
 	                }
 	
