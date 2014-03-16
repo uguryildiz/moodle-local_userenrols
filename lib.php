@@ -173,9 +173,9 @@
 
             if (self::$user_id_field_options == null) {
                 self::$user_id_field_options = array(
-                    'username' => get_string('username')
+                    /*'username' => get_string('username')*/
                     /*'email'    => get_string('email'),*/
-                    /*'idnumber' => get_string('idnumber')*/
+                    'idnumber' => get_string('idnumber')
                 );
             }
 
@@ -282,18 +282,38 @@
                 // Parse the line, from which we may get one or two
                 // matches since the group name is an optional item
                 // on a line by line basis
-                if (!preg_match($regex_pattern, $line, $matches)) {
+                /*if (!preg_match($regex_pattern, $line, $matches)) {
                     $result .= sprintf(get_string('ERR_PATTERN_MATCH', self::PLUGIN_NAME), $line_num, $line);
                     continue;
+                }*/
+                
+                if(false === ($matches = explode(";",$line))){ 
+                	$result .= sprintf(get_string('ERR_PATTERN_MATCH', self::PLUGIN_NAME), $line_num, $line);
                 }
 
-                $user_id_value  = $matches[1];
-                $group_name     = isset($matches[2]) ? $matches[2] : '';
+                $user_id_value  = $matches[6];
+                $group_name     = isset($matches[8]) ? $matches[8] : '';
+                $firstname = $matches[2];
+                $lastname = $matches[3];
 
                 // User must already exist, we import enrollments
                 // into courses, not users into the system
                 if (false === ($user_rec = $DB->get_record('user', array($id_field => addslashes($user_id_value))))) {
-                    $result .= sprintf(get_string('ERR_USERID_INVALID', self::PLUGIN_NAME), $line_num, $user_id_value);
+                	
+                	$user = new StdClass();
+                	$user->auth = 'manual';
+                	$user->confirmed = 1;
+                	$user->mnethostid = 1;
+                	$user->email = $user_id_value."@kocaeli.edu.tr";
+                	$user->username = $user_id_value;
+                	$user->password = md5($user_id_value);
+                	$user->lastname = $lastname;
+                	$user->firstname = $firstname;
+                	$user->id = $DB->insert_record('user', $user);
+                	
+                	$user_rec = $DB->get_record('user', array($id_field => addslashes($user_id_value)));
+                	
+                	//$result .= sprintf(get_string('ERR_USERID_INVALID', self::PLUGIN_NAME), $line_num, $user_id_value);
                     continue;
                 }
 
