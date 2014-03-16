@@ -272,131 +272,135 @@
             $fh = $import_file->get_content_file_handle();
             $line_num = 0;
             while (false !== ($line = fgets($fh))) {
-                $line_num++;
-
-                // Clean these up for each iteration
-                unset($user_rec, $new_group, $new_grouping);
-
-                if (!($line = trim($line))) continue;
-
-                // Parse the line, from which we may get one or two
-                // matches since the group name is an optional item
-                // on a line by line basis
-                /*if (!preg_match($regex_pattern, $line, $matches)) {
-                    $result .= sprintf(get_string('ERR_PATTERN_MATCH', self::PLUGIN_NAME), $line_num, $line);
-                    continue;
-                }*/
+                // first row pass
+            	if($line_num != 0){
+	            	$line_num++;
+	
+	                // Clean these up for each iteration
+	                unset($user_rec, $new_group, $new_grouping);
+	
+	                if (!($line = trim($line))) continue;
+	
+	                // Parse the line, from which we may get one or two
+	                // matches since the group name is an optional item
+	                // on a line by line basis
+	                /*if (!preg_match($regex_pattern, $line, $matches)) {
+	                    $result .= sprintf(get_string('ERR_PATTERN_MATCH', self::PLUGIN_NAME), $line_num, $line);
+	                    continue;
+	                }*/
+	                
+	                if(false === ($matches = explode(";",$line))){ 
+	                	$result .= sprintf(get_string('ERR_PATTERN_MATCH', self::PLUGIN_NAME), $line_num, $line);
+	                }
+	
+	                $user_id_value  = $matches[6];
+	                $group_name     = isset($matches[8]) ? $matches[8] : '';
+	                $firstname = $matches[2];
+	                $lastname = $matches[3];
+	
+	                // User must already exist, we import enrollments
+	                // into courses, not users into the system
+	                if (false === ($user_rec = $DB->get_record('user', array($id_field => addslashes($user_id_value))))) {
+	                	
+	                	$user = new StdClass();
+	                	$user->auth = 'manual';
+	                	$user->confirmed = 1;
+	                	$user->mnethostid = 1;
+	                	$user->email = $user_id_value."@kocaeli.edu.tr";
+	                	$user->username = $user_id_value;
+	                	$user->password = md5($user_id_value);
+	                	$user->lastname = $lastname;
+	                	$user->firstname = $firstname;
+	                	$user->idnumber = $user_id_value;
+	                	$user->id = $DB->insert_record('user', $user);
+	                	
+	                	$user_rec = $DB->get_record('user', array($id_field => addslashes($user_id_value)));
+	                	
+	                	$result .= sprintf(get_string('ERR_USERID_INVALID', self::PLUGIN_NAME), $line_num, $user_id_value);
+	                    continue;
+	                }
+	
+	                // Fetch all the role assignments this user might have for this course's context
+	                $roles = get_user_roles($course_context, $user_rec->id, false);
+	                // If a user has a role in this course, then we leave it alone and move on
+	                // to the group assignment if there is one. If they have no role, then we
+	                // should go ahead and add one, as long as it is not a metacourse.
+	                if (!$roles && $role_id > 0) {
+	                    if ($metacourse) {
+	                        $result .= sprintf(get_string('ERR_ENROLL_META', self::PLUGIN_NAME), $line_num, $user_id_value);
+	                    } else {
+	                        try {
+	                            $manual_enrol_plugin->enrol_user($enrol_instance, $user_rec->id, $role_id);
+	                        }
+	                        catch (Exception $exc) {
+	                            $result .= sprintf(get_string('ERR_ENROLL_FAILED', self::PLUGIN_NAME), $line_num, $user_id_value);
+	                            $result .= $exc->getMessage();
+	                            continue;
+	                        }
+	                    }
+	                }
+	
+	                // If no group assignments, or group is from file, but no
+	                // group found, next line
+	                if (!$group_assign ||($group_id == 0 && empty($group_name))) continue;
+	
+	                // If no group pre-selected, see if group from import already
+	                // created for that course
+	                $assign_group_id = 0;
+	                $assign_group_name = '';
+	                if ($selected_group != null) {
+	
+	                    $assign_group_id   = $selected_group->id;
+	                    $assign_group_name = $selected_group->name;
+	
+	                } else {
+	
+	                    foreach($existing_groups as $existing_group) {
+	                        if ($existing_group->name != $group_name)
+	                            continue;
+	                        $assign_group_id   = $existing_group->id;
+	                        $assign_group_name = $existing_group->name;
+	                        break;
+	                    }
+	
+	                    // No group by that name
+	                    if ($assign_group_id == 0) {
+	
+	                        // Can not create one, next line
+	                        if (!$group_create) continue;
+	
+	                        // Make a new group for this course
+	                        $new_group = new stdClass();
+	                        $new_group->name = addslashes($group_name);
+	                        $new_group->courseid = $course->id;
+	                        if (false === ($assign_group_id = groups_create_group($new_group))) {
+	                            $result .= sprintf(get_string('ERR_CREATE_GROUP', self::PLUGIN_NAME), $line_num, $group_name);
+	                            continue;
+	                        } else {
+	                            // Add the new group to our list for the benefit of
+	                            // the next contestant. Strip the slashes off the
+	                            // name since we do a name comparison earlier when
+	                            // trying to find the group in our local cache and
+	                            // an escaped semi-colon will cause the test to fail.
+	                            $new_group->name   =
+	                            $assign_group_name = stripslashes($new_group->name);
+	                            $new_group->id = $assign_group_id;
+	                            $existing_groups[] = $new_group;
+	                        }
+	
+	                    } // if ($assign_group_id == 0)
+	
+	                }
+	
+	                // Put the user in the group if not aleady in it
+	                if (   !groups_is_member($assign_group_id, $user_rec->id)
+	                    && !groups_add_member($assign_group_id, $user_rec->id)) {
+	                    $result .= sprintf(get_string('ERR_GROUP_MEMBER', self::PLUGIN_NAME), $line_num, $user_id_value, $assign_group_name);
+	                    continue;
+	                }
+	                
+                } // first row pass
                 
-                if(false === ($matches = explode(";",$line))){ 
-                	$result .= sprintf(get_string('ERR_PATTERN_MATCH', self::PLUGIN_NAME), $line_num, $line);
-                }
-
-                $user_id_value  = $matches[6];
-                $group_name     = isset($matches[8]) ? $matches[8] : '';
-                $firstname = $matches[2];
-                $lastname = $matches[3];
-
-                // User must already exist, we import enrollments
-                // into courses, not users into the system
-                if (false === ($user_rec = $DB->get_record('user', array($id_field => addslashes($user_id_value))))) {
-                	
-                	$user = new StdClass();
-                	$user->auth = 'manual';
-                	$user->confirmed = 1;
-                	$user->mnethostid = 1;
-                	$user->email = $user_id_value."@kocaeli.edu.tr";
-                	$user->username = $user_id_value;
-                	$user->password = md5($user_id_value);
-                	$user->lastname = $lastname;
-                	$user->firstname = $firstname;
-                	$user->idnumber = $user_id_value;
-                	$user->id = $DB->insert_record('user', $user);
-                	
-                	$user_rec = $DB->get_record('user', array($id_field => addslashes($user_id_value)));
-                	
-                	$result .= sprintf(get_string('ERR_USERID_INVALID', self::PLUGIN_NAME), $line_num, $user_id_value);
-                    continue;
-                }
-
-                // Fetch all the role assignments this user might have for this course's context
-                $roles = get_user_roles($course_context, $user_rec->id, false);
-                // If a user has a role in this course, then we leave it alone and move on
-                // to the group assignment if there is one. If they have no role, then we
-                // should go ahead and add one, as long as it is not a metacourse.
-                if (!$roles && $role_id > 0) {
-                    if ($metacourse) {
-                        $result .= sprintf(get_string('ERR_ENROLL_META', self::PLUGIN_NAME), $line_num, $user_id_value);
-                    } else {
-                        try {
-                            $manual_enrol_plugin->enrol_user($enrol_instance, $user_rec->id, $role_id);
-                        }
-                        catch (Exception $exc) {
-                            $result .= sprintf(get_string('ERR_ENROLL_FAILED', self::PLUGIN_NAME), $line_num, $user_id_value);
-                            $result .= $exc->getMessage();
-                            continue;
-                        }
-                    }
-                }
-
-                // If no group assignments, or group is from file, but no
-                // group found, next line
-                if (!$group_assign ||($group_id == 0 && empty($group_name))) continue;
-
-                // If no group pre-selected, see if group from import already
-                // created for that course
-                $assign_group_id = 0;
-                $assign_group_name = '';
-                if ($selected_group != null) {
-
-                    $assign_group_id   = $selected_group->id;
-                    $assign_group_name = $selected_group->name;
-
-                } else {
-
-                    foreach($existing_groups as $existing_group) {
-                        if ($existing_group->name != $group_name)
-                            continue;
-                        $assign_group_id   = $existing_group->id;
-                        $assign_group_name = $existing_group->name;
-                        break;
-                    }
-
-                    // No group by that name
-                    if ($assign_group_id == 0) {
-
-                        // Can not create one, next line
-                        if (!$group_create) continue;
-
-                        // Make a new group for this course
-                        $new_group = new stdClass();
-                        $new_group->name = addslashes($group_name);
-                        $new_group->courseid = $course->id;
-                        if (false === ($assign_group_id = groups_create_group($new_group))) {
-                            $result .= sprintf(get_string('ERR_CREATE_GROUP', self::PLUGIN_NAME), $line_num, $group_name);
-                            continue;
-                        } else {
-                            // Add the new group to our list for the benefit of
-                            // the next contestant. Strip the slashes off the
-                            // name since we do a name comparison earlier when
-                            // trying to find the group in our local cache and
-                            // an escaped semi-colon will cause the test to fail.
-                            $new_group->name   =
-                            $assign_group_name = stripslashes($new_group->name);
-                            $new_group->id = $assign_group_id;
-                            $existing_groups[] = $new_group;
-                        }
-
-                    } // if ($assign_group_id == 0)
-
-                }
-
-                // Put the user in the group if not aleady in it
-                if (   !groups_is_member($assign_group_id, $user_rec->id)
-                    && !groups_add_member($assign_group_id, $user_rec->id)) {
-                    $result .= sprintf(get_string('ERR_GROUP_MEMBER', self::PLUGIN_NAME), $line_num, $user_id_value, $assign_group_name);
-                    continue;
-                }
-
                 // Any other work...
 
             } // while fgets
