@@ -73,8 +73,10 @@
         if (null == ($useradmin_node = $courseadmin_node->get('users'))) {
             return;
         }
-
-        $useradmin_node->add("Test");
+		
+        $courseadmin_node->add('deneme');
+        $denemenode->make_active();
+        //$useradmin_node->add("Test");
         // Add our links
         $useradmin_node->add(
             get_string('IMPORT_MENU_LONG', local_userenrols_plugin::PLUGIN_NAME),
