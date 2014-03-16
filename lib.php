@@ -85,7 +85,7 @@
             local_userenrols_plugin::get_plugin_url('import', $context->instanceid),
             navigation_node::TYPE_SETTING,
             get_string('IMPORT_MENU_SHORT', local_userenrols_plugin::PLUGIN_NAME),
-            null, new pix_icon('i/import', 'import'))->forceopen = true; 
+            null, new pix_icon('i/import', 'import'))->make_active(); 
 		/*
         $useradmin_node->add(
             get_string('ASSIGN_MENU_LONG', local_userenrols_plugin::PLUGIN_NAME),
