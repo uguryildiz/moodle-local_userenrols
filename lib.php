@@ -312,11 +312,11 @@
 	                	$user->password = md5($user_id_value);
 	                	$user->lastname = $lastname;
 	                	$user->firstname = $firstname;
-	                	$user->id = $DB->insert_record('user', $user);
+	                	//$user->id = $DB->insert_record('user', $user);
 	                	
-	                	$user_rec = $DB->get_record('user', array($id_field => addslashes($user_id_value)));
+	                	//$user_rec = $DB->get_record('user', array($id_field => addslashes($user_id_value)));
 	                	
-	                	//$result .= sprintf(get_string('ERR_USERID_INVALID', self::PLUGIN_NAME), $line_num, $user_id_value);
+	                	$result .= sprintf(get_string('ERR_USERID_INVALID', self::PLUGIN_NAME), $line_num, $user_id_value);
 	                    continue;
 	                }
 	
