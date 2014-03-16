@@ -32,7 +32,7 @@
     defined('MOODLE_INTERNAL') || die();
 
 
-    $string['pluginname']               = 'Import User Enrolls & Group Assigns';
+    $string['pluginname']               = 'Upload / Import User Enrolls & Group Assigns';
 
     $string['IMPORT_MENU_LONG']         = 'Import Enrolls';
     $string['IMPORT_MENU_SHORT']        = 'Import';
@@ -76,10 +76,12 @@
     $string['INF_METACOURSE_WARN']      = '<b>WARNING</b>: You can not import enrollments directly into a metacourse. Instead, make enrollments into one of its child courses.<br /><br />';
     $string['INF_IMPORT_SUCCESS']       = 'User enrollment import successful';
     $string['INF_ASSIGN_SUCCESS']       = 'Group assignment successful';
+    $string['INF_USERCREATE_SUCCESS']   = "Line %u: New user created '%s'\n";
 
     $string['ERR_NO_MANUAL_ENROL']      = "Course must have Manual enrol plugin enabled.";
     $string['ERR_NO_META_ENROL']        = "Course must have 'Course meta link' enrol plugin enabled.";
     $string['ERR_PATTERN_MATCH']        = "Line %u: Unable to parse the line contents '%s'\n";
+    $string['ERR_USERNAME_MATCH']       = "Line %u: Unable to parse the line username '%s'. Username must contain 9 digit.\n";
     $string['ERR_INVALID_GROUP_ID']     = "The group id %u is invalid for this course.\n";
     $string['ERR_USERID_INVALID']       = "Line %u: Invalid userid value '%s'\n";
     $string['ERR_ENROLL_FAILED']        = "Line %u: Unable to create role assignment for userid '%s'\n";
