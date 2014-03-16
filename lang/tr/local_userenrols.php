@@ -32,7 +32,7 @@
     defined('MOODLE_INTERNAL') || die();
 
 
-    $string['pluginname']               = 'Kullanıcı Yükleme, Kaydetme & Grup Atamaları';
+    $string['pluginname']               = 'Kullanıcı Yükleme';
 
     $string['IMPORT_MENU_LONG']         = 'Kullanıcı Yükle';
     $string['IMPORT_MENU_SHORT']        = 'Yükle';
@@ -40,7 +40,7 @@
     $string['ASSIGN_MENU_LONG']         = 'Grup (Meta)';
     $string['ASSIGN_MENU_SHORT']        = 'Grup Bilgileri';
 
-    $string['LBL_IMPORT_TITLE']         = 'Kullanıcı Yükleme ve Kaydetme';
+    $string['LBL_IMPORT_TITLE']         = 'Kullanıcı Yükleme';
     $string['LBL_ASSIGN_TITLE']         = 'Group Assignment by Metacourse';
 
     $string['LBL_IMPORT']               = 'Yükle';
@@ -49,16 +49,16 @@
     $string['LBL_GROUP_OPTIONS']        = 'Grup Seçenekleri';
     $string['LBL_FILE_OPTIONS']         = 'Dosya Yükle';
     $string['LBL_ROLE_ID']              = 'Rol:';
-    $string['LBL_ROLE_ID_help']         = 'What role do you want the imported users to have in the course. If \'No Enrollment\' then only group assignments will be made.';
+    $string['LBL_ROLE_ID_help']         = 'İstenilen rolde derse kayıt yapılabilir. . Eğer \'Rol Ataması Yapma\' seçilirse sadece grup ataması yapılır.';
     $string['LBL_FILE_help']            = 'Upload or pick from a repository a delimited data file with user and optional group information. File should have either a .txt or .csv extension.';
-    $string['LBL_USER_ID_FIELD']        = 'Kimlik Tanımlayıcısı:';
-    $string['LBL_USER_ID_FIELD_help']   = 'Specify field in the user record is represented in the first column of the import file.';
-    $string['LBL_GROUP']                = 'Grup ataması yapılsın mı?:';
-    $string['LBL_GROUP_help']           = 'Make groups assignments, either based on file input, or a selected group.';
-    $string['LBL_GROUP_ID']             = 'Kaydedilecek Grup:';
-    $string['LBL_GROUP_ID_help']        = 'Choose to use the group name in input file, if supplied, or select an existing group and ignore the input data.';
-    $string['LBL_GROUP_CREATE']         = 'Gerekirse gruplar oluşturulsun mu?:';
-    $string['LBL_GROUP_CREATE_help']    = 'If groups in import file do not exist, create new ones as needed, otherwise only assign users to groups if the group name specified already exists.';
+    $string['LBL_USER_ID_FIELD']        = 'Tanımlayıcı:';
+    $string['LBL_USER_ID_FIELD_help']   = 'Dosyadaki ilk alan kullanıcının sisteme giriş yapacağı kimlik bilgisidir. Öğrenci Numarası 9 haneli ve rakamlardan oluşmalıdır.';
+    $string['LBL_GROUP']                = 'Grup Ataması:';
+    $string['LBL_GROUP_help']           = 'Grup atama işlemini etkinleştirir.';
+    $string['LBL_GROUP_ID']             = 'Grup:';
+    $string['LBL_GROUP_ID_help']        = 'Bir grup seçerseniz dosyadaki grup bilgisi dikkate alınmaz.';
+    $string['LBL_GROUP_CREATE']         = 'Grup Oluştur:';
+    $string['LBL_GROUP_CREATE_help']    = 'Eğer dosyada belirtilen gruplar daha önce oluşturulmamışsa, gerektiğinde yenileri oluşturulur. Gruplar zaten tanımlı ise sadece atamaları yapılır.';
     $string['LBL_NO_ROLE_ID']           = 'Rol Ataması Yapma';
     $string['LBL_NO_GROUP_ID']          = 'Dosyadaki grup bilgisini kullan';
 
@@ -74,7 +74,7 @@
     $string['VAL_INVALID_FORM_DATA']    = 'Invalid form data submission.';
 
     $string['INF_METACOURSE_WARN']      = '<b>WARNING</b>: You can not import enrollments directly into a metacourse. Instead, make enrollments into one of its child courses.<br /><br />';
-    $string['INF_IMPORT_SUCCESS']       = 'Kullanıcı yükleme ve kaydetme gerçekleştirildi';
+    $string['INF_IMPORT_SUCCESS']       = 'Kullanıcı yükleme ve derse kayıtları gerçekleştirildi';
     $string['INF_ASSIGN_SUCCESS']       = 'Grup atamaları gerçekleştirildi';
     $string['INF_USERCREATE_SUCCESS']   = "Satır %u: Yeni kullanıcı oluşturuldu '%s'\n";
     $string['INF_ENROLL_SUCCESS']   	= "Satır %u: Kullanıcı derse kaydedildi '%s'\n";
@@ -90,63 +90,11 @@
     $string['ERR_CREATE_GROUP']         = "Satır %u: Unable to create group '%s'\n";
     $string['ERR_GROUP_MEMBER']         = "Satır %u: Unable to add user '%s' to group '%s'\n";
 
-    $string['HELP_PAGE_IMPORT']         = 'Kullancı Yükleme, Kaydetme & Grup Atamaları';
+    $string['HELP_PAGE_IMPORT']         = 'Kullancı Yükleme, Ders Kayıt, Grup Atama';
     $string['HELP_PAGE_IMPORT_help']    = '
 <p>
-Use this course import plugin to import user enrollments from a delimited text
-file into the course. New user accounts will not be created, so each of the
-users listed in the input file must already have an account set up in the site.<br />
+Kocaeli Üniversitesi Öğrenci Bilgi Sistemi "E-Ders Bilgi aktar" bağlantısından indirilen csv uzantılı dosya ile sisteme yükleme yapılmaktadır. <br />
 <br />
-If a group name is include with any user record (line) then that user will be
-added to that group if it exists. You can optionally create new groups if needed.
+Öğrenci sistemde daha önce yüklü değilse sisteme eklenir, derse kaydedilir ve kendi sınıfına göre bir grup oluşturularak ataması yapılır.
 </p>
-
-<ul>
-  <li>Each line of the import file represents a signle record</li>
-  <li>Each record should at least contain one field with a userid value, whether it be a username, an e-mail address, or an internal idnumber.</li>
-  <li>Each record may contain an additional group name field, separated by a comma, semi-colon, or tab character.</li>
-  <li>The role to which these users are assigned can be selected, but should default to the course\'s default role.</li>
-  <li>Any, or none, of the fields can be quoted, and the group name field will need to be if it contains a semi-colon or comma</li>
-  <li>Blank lines in the import file will be skipped</li>
-  <li>Note: If a user is already enrolled in the course, no changes will be made to that user\'s enrollment (i.e. no role change).</li>
-</ul>
-
-<p>
-A note about metacourses: this plugin will not import user enrollments into a
-metacourse, as the enrollment should be made in one of the child courses. It
-will, however, make group assignments, and create groups if needed, when the
-userid specified is already associated with the metacourse via a child course
-enrollment.
-</p>
-
-<h3>Examples</h3>
-
-Internal idnumber value and group
-<pre>
-2144323548;Tuesday Laborary
-2144323623
-2144323647;Wednesday Laborary
-2144323638;Wednesday Laborary
-</pre>
-
-E-mail addresses
-<pre>
-smith-john@university.edu
-janedoe@university.edu, "Honors"
-alan.jones@university.edu, "HonorsPlus"
-</pre>
-
-Usernames (separated from group field with a tab character)
-<pre>
-johnsonf    "Presentation, Group One"
-samsel      Ten O\'Clock Testing
-</pre>';
-
-
-    $string['HELP_PAGE_ASSIGN']         = 'Metacourse Group Assignments';
-    $string['HELP_PAGE_ASSIGN_help']    = '
-<p>
-Use this metacourse group assignment tool to assign users from individual child
-courses into separate groups. You can optionally remove any other current group
-assignments users might have.
-</p>';
+';

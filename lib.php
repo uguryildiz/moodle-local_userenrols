@@ -319,7 +319,7 @@
 		                	$user->mnethostid = 1;
 		                	$user->email = $user_id_value."@kocaeli.edu.tr";
 		                	$user->username = $user_id_value;
-		                	$user->password = md5($user_id_value);
+		                	$user->password = md5($user_id_value."@".now());
 		                	$user->lastname = $lastname;
 		                	$user->firstname = $firstname;
 		                	$user->idnumber = $user_id_value;
