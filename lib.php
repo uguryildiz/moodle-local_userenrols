@@ -329,7 +329,7 @@
 		                	$user_rec = $DB->get_record('user', array($id_field => addslashes($user_id_value)));
 		                	$result .= sprintf(get_string('INF_USERCREATE_SUCCESS', self::PLUGIN_NAME), $line_num, $user_id_value);
 	                	}
-	                    continue;
+	                    //continue;
 	                }
 	
 	                // Fetch all the role assignments this user might have for this course's context
