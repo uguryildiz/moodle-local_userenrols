@@ -81,14 +81,14 @@
 
     $string['ERR_NO_MANUAL_ENROL']      = "Course must have Manual enrol plugin enabled.";
     $string['ERR_NO_META_ENROL']        = "Course must have 'Course meta link' enrol plugin enabled.";
-    $string['ERR_PATTERN_MATCH']        = "Line %u: Unable to parse the line contents '%s'\n";
-    $string['ERR_USERNAME_MATCH']       = "Line %u: Unable to parse the line username '%s'. Username must contain 9 digit.\n";
+    $string['ERR_PATTERN_MATCH']        = "Satır %u: dosya içeriği okunamadı '%s'\n";
+    $string['ERR_USERNAME_MATCH']       = "Satır %u: kullanıcı adı okunama '%s'. Kullanıcı Adı 9 haneli rakam olmalıdır.\n";
     $string['ERR_INVALID_GROUP_ID']     = "The group id %u is invalid for this course.\n";
-    $string['ERR_USERID_INVALID']       = "Line %u: Invalid userid value '%s'\n";
-    $string['ERR_ENROLL_FAILED']        = "Line %u: Unable to create role assignment for userid '%s'\n";
-    $string['ERR_ENROLL_META']          = "Line %u: No existing enrollment in metacourse for userid '%s'\n";
-    $string['ERR_CREATE_GROUP']         = "Line %u: Unable to create group '%s'\n";
-    $string['ERR_GROUP_MEMBER']         = "Line %u: Unable to add user '%s' to group '%s'\n";
+    $string['ERR_USERID_INVALID']       = "Satır %u: Invalid userid value '%s'\n";
+    $string['ERR_ENROLL_FAILED']        = "Satır %u: Unable to create role assignment for userid '%s'\n";
+    $string['ERR_ENROLL_META']          = "Satır %u: No existing enrollment in metacourse for userid '%s'\n";
+    $string['ERR_CREATE_GROUP']         = "Satır %u: Unable to create group '%s'\n";
+    $string['ERR_GROUP_MEMBER']         = "Satır %u: Unable to add user '%s' to group '%s'\n";
 
     $string['HELP_PAGE_IMPORT']         = 'Kullancı Yükleme, Kaydetme & Grup Atamaları';
     $string['HELP_PAGE_IMPORT_help']    = '
