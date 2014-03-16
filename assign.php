@@ -44,6 +44,9 @@
     // $PAGE, $USER, $COURSE, and other globals now set
     // up, check the capabilities
     require_capability(local_userenrols_plugin::REQUIRED_CAP, $PAGE->context);
+    
+    $systemcontext = context_system::instance();
+    require_capability('moodle/user:create', $systemcontext);
 
     $user_context = context_user::instance($USER->id);
 
