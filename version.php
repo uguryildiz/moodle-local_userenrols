@@ -34,7 +34,7 @@
 
     $plugin             = new stdClass();
 
-    $plugin->version    = 2013052002;
+    $plugin->version    = 2014031613;
     $plugin->requires   = 2012062500;
     $plugin->release    = "0.0.2";
     $plugin->component = 'local_userenrols';
