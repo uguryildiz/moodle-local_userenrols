@@ -173,9 +173,9 @@
 
             if (self::$user_id_field_options == null) {
                 self::$user_id_field_options = array(
-                    'username' => get_string('username'),
-                    'email'    => get_string('email'),
-                    'idnumber' => get_string('idnumber')
+                    'username' => get_string('username')
+                    /*'email'    => get_string('email'),*/
+                    /*'idnumber' => get_string('idnumber')*/
                 );
             }
 
