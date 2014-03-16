@@ -42,11 +42,14 @@
      * Hook to insert a link in global navigation menu block
      * @param global_navigation $navigation
      */
-    /*
-    function local_userenrols_extends_navigation(global_navigation $navigation)
+    
+    function local_userenrols_extends_navigation(global_navigation $navigation,$context)
     {
+    	$navigation->add('deneme');
+    	$navigation->add(get_string('IMPORT_MENU_LONG', local_userenrols_plugin::PLUGIN_NAME), local_userenrols_plugin::get_plugin_url('import', $context->instanceid), navigation_node::TYPE_SETTING, null, null, new pix_icon('i/import', ''));
+    	
     }
-    */
+    
 
 
     /**
@@ -85,7 +88,7 @@
             local_userenrols_plugin::get_plugin_url('import', $context->instanceid),
             navigation_node::TYPE_SETTING,
             get_string('IMPORT_MENU_SHORT', local_userenrols_plugin::PLUGIN_NAME),
-            null, new pix_icon('i/import', 'import'))->make_active(); 
+            null, new pix_icon('i/import', 'import')); 
 		/*
         $useradmin_node->add(
             get_string('ASSIGN_MENU_LONG', local_userenrols_plugin::PLUGIN_NAME),
