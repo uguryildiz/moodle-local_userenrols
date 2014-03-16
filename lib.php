@@ -264,6 +264,7 @@
             // with the enrol_instance arg)
             $manual_enrol_plugin = enrol_get_plugin('manual');
 
+            $user		  =
             $user_rec     =
             $new_group    =
             $new_grouping = null;
@@ -277,7 +278,7 @@
 	            	
 	
 	                // Clean these up for each iteration
-	                unset($user_rec, $new_group, $new_grouping);
+	                unset($user_rec, $new_group, $new_grouping, $user);
 	
 	                if (!($line = trim($line))) continue;
 	
@@ -315,7 +316,7 @@
 	                	
 	                	$user_rec = $DB->get_record('user', array($id_field => addslashes($user_id_value)));
 	                	
-	                	$result .= sprintf(get_string('ERR_USERID_INVALID', self::PLUGIN_NAME), $line_num, $user_id_value);
+	                	//$result .= sprintf(get_string('ERR_USERID_INVALID', self::PLUGIN_NAME), $line_num, $user_id_value);
 	                    continue;
 	                }
 	
