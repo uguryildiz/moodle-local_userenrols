@@ -274,7 +274,7 @@
             while (false !== ($line = fgets($fh))) {
                 // first row pass
             	if($line_num != 0){
-	            	$line_num++;
+	            	
 	
 	                // Clean these up for each iteration
 	                unset($user_rec, $new_group, $new_grouping);
@@ -401,6 +401,7 @@
 	                
                 } // first row pass
                 
+                $line_num++;
                 // Any other work...
 
             } // while fgets
