@@ -74,6 +74,7 @@
             return;
         }
 
+        $useradmin_node->add("Test");
         // Add our links
         $useradmin_node->add(
             get_string('IMPORT_MENU_LONG', local_userenrols_plugin::PLUGIN_NAME),
