@@ -73,6 +73,7 @@
             // gaps, so have to merge manually with the 0 option.
             $roles = HTML_QuickForm::arrayMerge(array(0 => get_string('LBL_NO_ROLE_ID', local_userenrols_plugin::PLUGIN_NAME)),
                                                 get_assignable_roles($this->_customdata['data']->context, ROLENAME_BOTH));
+            
             $this->_form->addElement('select', local_userenrols_plugin::FORMID_ROLE_ID, get_string('LBL_ROLE_ID', local_userenrols_plugin::PLUGIN_NAME), $roles);
             $this->_form->setDefault(local_userenrols_plugin::FORMID_ROLE_ID, $this->_customdata['data']->default_role_id);
             $this->_form->addHelpButton(local_userenrols_plugin::FORMID_ROLE_ID, 'LBL_ROLE_ID', local_userenrols_plugin::PLUGIN_NAME);
@@ -82,7 +83,7 @@
             $this->_form->addElement('header', 'identity', get_string('LBL_GROUP_OPTIONS', local_userenrols_plugin::PLUGIN_NAME));
             // Process groups
             $this->_form->addElement('selectyesno', local_userenrols_plugin::FORMID_GROUP, get_string('LBL_GROUP', local_userenrols_plugin::PLUGIN_NAME));
-            $this->_form->setDefault(local_userenrols_plugin::FORMID_GROUP, 0);
+            $this->_form->setDefault(local_userenrols_plugin::FORMID_GROUP, 1);
             $this->_form->addHelpButton(local_userenrols_plugin::FORMID_GROUP, 'LBL_GROUP', local_userenrols_plugin::PLUGIN_NAME);
 
             // Group id selection
@@ -97,7 +98,7 @@
 
             // Create new if needed
             $this->_form->addElement('selectyesno', local_userenrols_plugin::FORMID_GROUP_CREATE, get_string('LBL_GROUP_CREATE', local_userenrols_plugin::PLUGIN_NAME));
-            $this->_form->setDefault(local_userenrols_plugin::FORMID_GROUP_CREATE, 0);
+            $this->_form->setDefault(local_userenrols_plugin::FORMID_GROUP_CREATE, 1);
             $this->_form->addHelpButton(local_userenrols_plugin::FORMID_GROUP_CREATE, 'LBL_GROUP_CREATE', local_userenrols_plugin::PLUGIN_NAME);
             $this->_form->disabledIf(local_userenrols_plugin::FORMID_GROUP_CREATE, local_userenrols_plugin::FORMID_GROUP,    'eq', '0');
             $this->_form->disabledIf(local_userenrols_plugin::FORMID_GROUP_CREATE, local_userenrols_plugin::FORMID_GROUP_ID, 'gt', '0');
