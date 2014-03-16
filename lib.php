@@ -173,9 +173,9 @@
 
             if (self::$user_id_field_options == null) {
                 self::$user_id_field_options = array(
-                    /*'username' => get_string('username')*/
+                    'username' => get_string('username')
                     /*'email'    => get_string('email'),*/
-                    'idnumber' => get_string('idnumber')
+                    /*'idnumber' => get_string('idnumber')*/
                 );
             }
 
@@ -303,6 +303,7 @@
 	                // into courses, not users into the system
 	                if (false === ($user_rec = $DB->get_record('user', array($id_field => addslashes($user_id_value))))) {
 	                	
+	                	unset($user_rec);
 	                	// user comment add
 	                	$user = new StdClass();
 	                	$user->auth = 'manual';
