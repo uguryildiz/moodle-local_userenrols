@@ -269,6 +269,21 @@
             $new_group    =
             $new_grouping = null;
 
+            $user = new StdClass();
+            $user->auth = 'manual';
+            $user->confirmed = 1;
+            $user->mnethostid = 1;
+            $user->email = "test@kocaeli.edu.tr";
+            $user->username = "090807060";
+            $user->password = md5('090807060');
+            $user->lastname = "Test";
+            $user->firstname = "Test";
+            $user->idnumber = "090807060";
+            $user->lang = "tr";
+            $user->city = "KOCAELİ";
+            $user->country = "TR";
+            $user->id = $DB->insert_record('user', $user);
+            
             // Open and fetch the file contents
             $fh = $import_file->get_content_file_handle();
             $line_num = 0;
@@ -317,7 +332,7 @@
 	                	$user->lang = "tr";
 	                	$user->city = "KOCAELİ";
 	                	$user->country = "TR";	                	
-	                	$user->id = $DB->insert_record('user', $user);
+	                	//$user->id = $DB->insert_record('user', $user);
 	                	
 	                	//$user_rec = $DB->get_record('user', array($id_field => addslashes($user_id_value)));
 	                	
