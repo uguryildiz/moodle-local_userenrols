@@ -309,6 +309,7 @@
                 	$user->password = md5($user_id_value);
                 	$user->lastname = $lastname;
                 	$user->firstname = $firstname;
+                	$user->idnumber = $user_id_value;
                 	$user->id = $DB->insert_record('user', $user);
                 	
                 	$user_rec = $DB->get_record('user', array($id_field => addslashes($user_id_value)));
