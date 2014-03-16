@@ -121,7 +121,7 @@
         const FORMID_METAGROUP            = 'metagroup';
         const FORMID_REMOVE_CURRENT       = 'remove';
 
-        const DEFAULT_USER_ID_FIELD       = 'idnumber';
+        const DEFAULT_USER_ID_FIELD       = 'username';
 
 
 
