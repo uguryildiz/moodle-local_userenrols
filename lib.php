@@ -63,7 +63,7 @@
      * @return void
      */
     function local_userenrols_extends_settings_navigation(settings_navigation $navigation, $context)
-    {
+    {	echo "test";
 
         // If not in a course context, then leave
         if ($context == null || $context->contextlevel != CONTEXT_COURSE) {
