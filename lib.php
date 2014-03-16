@@ -307,8 +307,8 @@
 	                	
 	                	unset($user_rec);
 	                	
-	                	if(false === preg_match("[0-9]{9}",$matches[0])){
-	                		$result .= sprintf(get_string('ERR_USERNAME_MATCH', self::PLUGIN_NAME), $line_num, $line);
+	                	if(0 === preg_match("[0-9]{9}",$matches[0])){
+	                		$result .= sprintf(get_string('ERR_USERNAME_MATCH', self::PLUGIN_NAME), $line_num, $user_id_value);
 	                	}else{
 		                	// user object create
 		                	$user = new StdClass();
