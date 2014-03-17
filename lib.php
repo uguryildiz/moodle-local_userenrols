@@ -395,7 +395,7 @@
 	                // Clean these up for each iteration
 	                unset($user_rec, $new_group, $new_grouping, $user);
 	
-	                if (!($line = utf8_encode(trim($line)))) continue;
+	                if (!($line = mb_convert_encoding(trim($line),"ISO-8859-9", "UTF-8"))) continue;
 	
 	                // Parse the line, from which we may get one or two
 	                // matches since the group name is an optional item
@@ -412,7 +412,7 @@
 	                
 	
 	                $user_id_value  = $matches[0];
-	                $group_name     = isset($matches[8]) ? mb_convert_encoding($matches[8], "UTF-8", "ISO-8859-9") : '';
+	                $group_name     = isset($matches[8]) ? $matches[8] : '';
 	                $firstname = $matches[2];
 	                $lastname = $matches[3];
 	
