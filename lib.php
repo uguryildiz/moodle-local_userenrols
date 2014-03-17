@@ -53,7 +53,7 @@
     	
     }*/
     
-    function userenrols_extends_navigation(global_navigation $settingsnav)
+    function userenrols_extends_navigation(global_navigation $navigation)
     {
     	
     	global $CFG, $PAGE;
@@ -65,7 +65,9 @@
     	}*/
     	
     	// Only let users with the appropriate capability see this settings item.
-    	$settingnode = $settingsnav->find('courseadmin', navigation_node::TYPE_COURSE);
+    	$settingnode = $settingsnav->get('users', navigation_node::TYPE_SETTING);
+    	print_r($settingnode);
+    	echo $navgation->page->context->instanceid;
     	//$settingnode->add_node('test');
     	
     	/*
