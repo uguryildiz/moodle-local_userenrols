@@ -53,6 +53,41 @@
     	
     }*/
     
+    function userenrols_extends_navigation(global_navigation $navigation, $context)
+    {
+    
+    	// If not in a course context, then leave
+    
+    	if ($context == null || $context->contextlevel != CONTEXT_COURSE) {
+    		return;
+    	}
+    
+    	// When on front page there is 'frontpagesettings' node, other
+    	// courses will have 'courseadmin' node
+    	if (null == ($courseadmin_node = $navigation->get('courseadmin'))) {
+    		// Keeps us off the front page
+    		return;
+    	}
+    	if (null == ($useradmin_node = $courseadmin_node->get('users'))) {
+    		return;
+    	}
+    
+    	// Add our links
+    	$useradmin_node->add(
+    			get_string('IMPORT_MENU_LONG', local_userenrols_plugin::PLUGIN_NAME),
+    			local_userenrols_plugin::get_plugin_url('import', $context->instanceid),
+    			navigation_node::TYPE_SETTING,
+    			get_string('IMPORT_MENU_SHORT', local_userenrols_plugin::PLUGIN_NAME),
+    			null, new pix_icon('i/import', 'import'));
+    	/*
+    	 $useradmin_node->add(
+    	 		get_string('ASSIGN_MENU_LONG', local_userenrols_plugin::PLUGIN_NAME),
+    	 		local_userenrols_plugin::get_plugin_url('assign', $context->instanceid),
+    	 		navigation_node::TYPE_SETTING,
+    	 		get_string('ASSIGN_MENU_SHORT', local_userenrols_plugin::PLUGIN_NAME),
+    	 		null, new pix_icon('t/move', 'assign')); */
+    
+    }
 
 
     /**
@@ -67,10 +102,10 @@
     {	
 
         // If not in a course context, then leave
-        /*
+        
     	if ($context == null || $context->contextlevel != CONTEXT_COURSE) {
             return;
-        }*/
+        }
 
         // When on front page there is 'frontpagesettings' node, other
         // courses will have 'courseadmin' node
