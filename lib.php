@@ -58,9 +58,9 @@
     	
     	global $PAGE;
     	
-    	$context = context_module::instance($PAGE->course->id);
+    	//$context = context_module::instance($PAGE->course->id);
     	//$coursenode = $PAGE->navigation->find($PAGE->course->id, navigation_node::TYPE_COURSE);
-    	if ($context == null || $context->contextlevel != CONTEXT_COURSE) {
+    	if ($PAGE->context == null || $PAGE->context->contextlevel != CONTEXT_COURSE) {
     		return;
     	}
     	
