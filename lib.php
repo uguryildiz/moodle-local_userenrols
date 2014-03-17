@@ -58,7 +58,14 @@
     	
     	global $PAGE;
     	
-    	echo $PAGE->course->id;
+    	$navigation->add(
+    			get_string('IMPORT_MENU_LONG', local_userenrols_plugin::PLUGIN_NAME),
+    			local_userenrols_plugin::get_plugin_url('import', $PAGE->course->id),
+    			navigation_node::TYPE_SETTING,
+    			get_string('IMPORT_MENU_SHORT', local_userenrols_plugin::PLUGIN_NAME),
+    			null, new pix_icon('i/import', 'import'));
+    	
+    	//echo $PAGE->course->id;
     	// Only add this settings item on non-site course pages.
     	/*
     	if (!$PAGE->course or $PAGE->course->id == 1) {
