@@ -70,18 +70,20 @@
     		// Keeps us off the front page
     		return;
     	}
-
-    	if (null == ($usersnode =  $coursenode->find('users',navigation_node::TYPE_COURSE))) {
-    		// Keeps us off the front page
+    	
+    	if(!has_capability(local_userenrols_plugin::REQUIRED_CAP, $PAGE->context))
+    	{
     		return;
     	}
+
+ 
     	    	
     	//$coursenode = $PAGE->settingsnav->find('courseadmin',navigation_node::TYPE_COURSE);
     	//print_r($coursenode);
     	//echo $coursenode;
     	
     	//$PAGE->settingsnav->add(
-    	$usersnode->add(
+    	$coursenode->add(
     			get_string('IMPORT_MENU_LONG', local_userenrols_plugin::PLUGIN_NAME),
     			local_userenrols_plugin::get_plugin_url('import', $PAGE->course->id),
     			navigation_node::TYPE_SETTING,
