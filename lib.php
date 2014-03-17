@@ -56,7 +56,7 @@
     function userenrols_extends_navigation(global_navigation $navigation)
     {
     	
-    	global $CFG, $PAGE;
+    	//global $CFG, $PAGE;
     	
     	// Only add this settings item on non-site course pages.
     	/*
@@ -65,9 +65,9 @@
     	}*/
     	
     	// Only let users with the appropriate capability see this settings item.
-    	$settingnode = $navigation->get('users', navigation_node::TYPE_SETTING);
-    	print_r($settingnode);
-    	echo $navigation->page->context->instanceid;
+    	//$settingnode = $navigation->get('users', navigation_node::TYPE_SETTING);
+    	//print_r($settingnode);
+    	//echo $navigation->page->context->instanceid;
     	//$settingnode->add_node('test');
     	
     	/*
