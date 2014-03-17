@@ -66,7 +66,7 @@
     	
     	// Only let users with the appropriate capability see this settings item.
     	$settingnode = $settingsnav->find('courseadmin', navigation_node::TYPE_COURSE);
-    	$settingnode->add('test');
+    	$settingnode->add_node('test');
     	
     	/*
     	if ($settingnode = $settingsnav->find('courseadmin', navigation_node::TYPE_COURSE)) {
