@@ -69,7 +69,7 @@
     			local_userenrols_plugin::get_plugin_url('import', $PAGE->course->id),
     			navigation_node::TYPE_SETTING,
     			get_string('IMPORT_MENU_SHORT', local_userenrols_plugin::PLUGIN_NAME),
-    			null, new pix_icon('i/restore', get_string('IMPORT_MENU_LONG', local_userenrols_plugin::PLUGIN_NAME)));
+    			null, new pix_icon('i/group', get_string('IMPORT_MENU_LONG', local_userenrols_plugin::PLUGIN_NAME)));
     	
     	//echo $PAGE->course->id;
     	// Only add this settings item on non-site course pages.
