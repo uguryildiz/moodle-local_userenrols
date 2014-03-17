@@ -62,6 +62,7 @@
      * @param course_context      $context
      * @return void
      */
+    /*
     function local_userenrols_extends_settings_navigation(settings_navigation $navigation, $context)
     {	echo "test";
 
@@ -90,9 +91,10 @@
             get_string('IMPORT_MENU_LONG', local_userenrols_plugin::PLUGIN_NAME),
             local_userenrols_plugin::get_plugin_url('import', $context->instanceid),
             /*navigation_node::TYPE_SETTING,*/
+    		/*
         	navigation_node::override_active_url(local_userenrols_plugin::get_plugin_url('import', $context->instanceid)),
             get_string('IMPORT_MENU_SHORT', local_userenrols_plugin::PLUGIN_NAME),
-            null, new pix_icon('i/import', 'import')); 
+            null, new pix_icon('i/import', 'import')); */
 		/*
         $useradmin_node->add(
             get_string('ASSIGN_MENU_LONG', local_userenrols_plugin::PLUGIN_NAME),
@@ -101,8 +103,40 @@
             get_string('ASSIGN_MENU_SHORT', local_userenrols_plugin::PLUGIN_NAME),
             null, new pix_icon('t/move', 'assign')); */
 
-    }
+   /* }*/
 
+    function local_userenrols_extends_settings_navigation($settingsnav, $context) {
+    	global $CFG, $PAGE;
+    
+    	// Only add this settings item on non-site course pages.
+    	if (!$PAGE->course or $PAGE->course->id == 1) {
+    		return;
+    	}
+    
+    	// Only let users with the appropriate capability see this settings item.
+    	if (!has_capability('moodle/backup:backupcourse', context_course::instance($PAGE->course->id))) {
+    		return;
+    	}
+    
+    	if ($settingnode = $settingsnav->find('courseadmin', navigation_node::TYPE_COURSE)) {
+    		$strfoo = get_string('foo', 'local_userenrols');
+    		$url = new moodle_url('/local/userenrols/import.php', array('id' => $PAGE->course->id));
+    		$foonode = navigation_node::create(
+    				$strfoo,
+    				$url,
+    				navigation_node::NODETYPE_LEAF,
+    				'local_userenrols',
+    				'local_userenrols',
+    				new pix_icon('t/addcontact', $strfoo)
+    		);
+    		if ($PAGE->url->compare($url, URL_MATCH_BASE)) {
+    			$foonode->make_active();
+    		}
+    		$settingnode->add_node($foonode);
+    	}
+    }
+    
+    
 
 
     class local_userenrols_plugin
