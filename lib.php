@@ -66,7 +66,7 @@
     	
     	// When on front page there is 'frontpagesettings' node, other
     	// courses will have 'courseadmin' node
-    	if (null == ($coursenode =  $PAGE->settingsnav->find('courseadmin',navigation_node::TYPE_COURSE))) {
+    	if (false === ($coursenode =  $PAGE->settingsnav->find('courseadmin',navigation_node::TYPE_COURSE))) {
     		// Keeps us off the front page
     		return;
     	}
