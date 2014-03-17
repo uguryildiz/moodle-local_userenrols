@@ -395,7 +395,7 @@
 	                // Clean these up for each iteration
 	                unset($user_rec, $new_group, $new_grouping, $user);
 	
-	                if (!($line = mb_convert_encoding(trim($line),"ISO-8859-9", "UTF-8"))) continue;
+	                if (!($line = mb_convert_encoding(trim($line),"ISO-8859-9", "Windows-1254"))) continue;
 	
 	                // Parse the line, from which we may get one or two
 	                // matches since the group name is an optional item
