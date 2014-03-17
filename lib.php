@@ -60,12 +60,7 @@
     	
     	//$context = context_module::instance($PAGE->course->id);
     	//$coursenode = $PAGE->navigation->find($PAGE->course->id, navigation_node::TYPE_COURSE);
-    	if ($PAGE->context == null || $PAGE->context->contextlevel != CONTEXT_COURSE) {
-    		return;
-    	}
-    	
-    	if(!is_object($PAGE->settingsnav))
-    	{
+    	if ($PAGE->context == null || $PAGE->context->contextlevel != CONTEXT_COURSE || false == is_object($PAGE->settingsnav)) {
     		return;
     	}
     	
