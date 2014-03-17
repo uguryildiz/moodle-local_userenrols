@@ -56,8 +56,9 @@
     function userenrols_extends_navigation(global_navigation $navigation)
     {
     	
-    	//global $CFG, $PAGE;
+    	global $PAGE;
     	
+    	echo $PAGE->course->id;
     	// Only add this settings item on non-site course pages.
     	/*
     	if (!$PAGE->course or $PAGE->course->id == 1) {
