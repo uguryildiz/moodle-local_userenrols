@@ -504,7 +504,7 @@
 	
 	                        // Make a new group for this course
 	                        $new_group = new stdClass();
-	                        $new_group->name = addslashes(utf8_encode($group_name));
+	                        $new_group->name = addslashes($group_name);
 	                        $new_group->courseid = $course->id;
 	                        if (false === ($assign_group_id = groups_create_group($new_group))) {
 	                            $result .= sprintf(get_string('ERR_CREATE_GROUP', self::PLUGIN_NAME), $line_num, $group_name);
