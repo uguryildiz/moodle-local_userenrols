@@ -58,9 +58,10 @@
     	
     	global $PAGE;
     	
-    	$coursenode = $PAGE->navigation->find($PAGE->course->id, navigation_node::TYPE_COURSE);
+    	//$coursenode = $PAGE->navigation->find($PAGE->course->id, navigation_node::TYPE_COURSE);
+    	$coursenode = $PAGE->settingsnav->get('courseadmin');
     	
-    	$PAGE->settingsnav->add(
+    	$coursenode->add(
     			get_string('IMPORT_MENU_LONG', local_userenrols_plugin::PLUGIN_NAME),
     			local_userenrols_plugin::get_plugin_url('import', $PAGE->course->id),
     			navigation_node::TYPE_SETTING,
