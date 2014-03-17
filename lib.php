@@ -58,8 +58,20 @@
     	
     	global $PAGE;
     	
+    	//$context = context_module::instance($PAGE->course->id);
     	//$coursenode = $PAGE->navigation->find($PAGE->course->id, navigation_node::TYPE_COURSE);
-    	$coursenode = $PAGE->settingsnav->find('courseadmin',navigation_node::TYPE_COURSE);
+    	//if ($context == null || $context->contextlevel != CONTEXT_COURSE) {
+    	//	return;
+    	//}
+    	
+    	// When on front page there is 'frontpagesettings' node, other
+    	// courses will have 'courseadmin' node
+    	if (null == ($coursenode =  $PAGE->settingsnav->find('users',navigation_node::TYPE_COURSE))) {
+    		// Keeps us off the front page
+    		return;
+    	}   	
+    	    	
+    	//$coursenode = $PAGE->settingsnav->find('courseadmin',navigation_node::TYPE_COURSE);
     	//print_r($coursenode);
     	//echo $coursenode;
     	
