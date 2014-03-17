@@ -66,17 +66,22 @@
     	
     	// When on front page there is 'frontpagesettings' node, other
     	// courses will have 'courseadmin' node
-    	if (null == ($coursenode =  $PAGE->settingsnav->find('users',navigation_node::TYPE_COURSE))) {
+    	if (null == ($coursenode =  $PAGE->settingsnav->find('courseadmin',navigation_node::TYPE_COURSE))) {
     		// Keeps us off the front page
     		return;
-    	}   	
+    	}
+
+    	if (null == ($usersnode =  $coursenode->find('users',navigation_node::TYPE_COURSE))) {
+    		// Keeps us off the front page
+    		return;
+    	}
     	    	
     	//$coursenode = $PAGE->settingsnav->find('courseadmin',navigation_node::TYPE_COURSE);
     	//print_r($coursenode);
     	//echo $coursenode;
     	
     	//$PAGE->settingsnav->add(
-    	$coursenode->add(
+    	$usersnode->add(
     			get_string('IMPORT_MENU_LONG', local_userenrols_plugin::PLUGIN_NAME),
     			local_userenrols_plugin::get_plugin_url('import', $PAGE->course->id),
     			navigation_node::TYPE_SETTING,
