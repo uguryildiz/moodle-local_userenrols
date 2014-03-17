@@ -59,13 +59,16 @@
     	global $CFG, $PAGE;
     	
     	// Only add this settings item on non-site course pages.
+    	/*
     	if (!$PAGE->course or $PAGE->course->id == 1) {
     		return;
-    	}
+    	}*/
     	
     	// Only let users with the appropriate capability see this settings item.
+    	$settingnode = $settingsnav->find('courseadmin', navigation_node::TYPE_COURSE);
+    	$settingnode->add('test');
     	
-    	
+    	/*
     	if ($settingnode = $settingsnav->find('courseadmin', navigation_node::TYPE_COURSE)) {
     		$strfoo = get_string('foo', 'local_userenrols');
     		$url = new moodle_url('/local/userenrols/import.php', array('id' => $PAGE->course->id));
@@ -81,7 +84,7 @@
     			$foonode->make_active();
     		}
     		$settingnode->add_node($foonode);
-    	}
+    	}*/
     	
     	//echo "test";
     	// If not in a course context, then leave
