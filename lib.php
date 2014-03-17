@@ -60,7 +60,7 @@
     	
     	//$coursenode = $PAGE->navigation->find($PAGE->course->id, navigation_node::TYPE_COURSE);
     	$coursenode = $PAGE->settingsnav->find('courseadmin',navigation_node::TYPE_COURSE);
-    	print_r($coursenode);
+    	//print_r($coursenode);
     	
     	$PAGE->settingsnav->add(
     			get_string('IMPORT_MENU_LONG', local_userenrols_plugin::PLUGIN_NAME),
