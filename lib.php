@@ -55,7 +55,7 @@
     
     function userenrols_extends_navigation(global_navigation $navigation, $context)
     {
-    
+    	echo "test";
     	// If not in a course context, then leave
     
     	if ($context == null || $context->contextlevel != CONTEXT_COURSE) {
