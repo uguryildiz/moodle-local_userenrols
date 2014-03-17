@@ -396,7 +396,7 @@
 	                unset($user_rec, $new_group, $new_grouping, $user);
 	                //echo mb_detect_encoding($line);
 	                //exit;
-	                if (!($line = mb_convert_encoding(trim($line),"UTF-8", "Windows-1254"))) continue;
+	                if (!($line = mb_convert_encoding(trim($line),mb_detect_encoding($line), "Windows-1254"))) continue;
 	
 	                // Parse the line, from which we may get one or two
 	                // matches since the group name is an optional item
