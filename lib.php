@@ -395,7 +395,7 @@
 	                // Clean these up for each iteration
 	                unset($user_rec, $new_group, $new_grouping, $user);
 	
-	                if (!($line = trim($line))) continue;
+	                if (!($line = utf8_encode(trim($line)))) continue;
 	
 	                // Parse the line, from which we may get one or two
 	                // matches since the group name is an optional item
