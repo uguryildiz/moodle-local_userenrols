@@ -55,12 +55,12 @@
     
     function userenrols_extends_navigation(global_navigation $navigation, $context)
     {
-    	echo "test";
+    	//echo "test";
     	// If not in a course context, then leave
-    
+       /*
     	if ($context == null || $context->contextlevel != CONTEXT_COURSE) {
     		return;
-    	}
+    	}*/
     
     	// When on front page there is 'frontpagesettings' node, other
     	// courses will have 'courseadmin' node
