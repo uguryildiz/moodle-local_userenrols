@@ -53,19 +53,48 @@
     	
     }*/
     
-    function userenrols_extends_navigation(global_navigation $navigation)
+    function userenrols_extends_navigation(global_navigation $settingsnav)
     {
+    	
+    	global $CFG, $PAGE;
+    	
+    	// Only add this settings item on non-site course pages.
+    	if (!$PAGE->course or $PAGE->course->id == 1) {
+    		return;
+    	}
+    	
+    	// Only let users with the appropriate capability see this settings item.
+    	
+    	
+    	if ($settingnode = $settingsnav->find('courseadmin', navigation_node::TYPE_COURSE)) {
+    		$strfoo = get_string('foo', 'local_userenrols');
+    		$url = new moodle_url('/local/userenrols/import.php', array('id' => $PAGE->course->id));
+    		$foonode = navigation_node::create(
+    				$strfoo,
+    				$url,
+    				navigation_node::NODETYPE_LEAF,
+    				'userenrols',
+    				'userenrols',
+    				new pix_icon('i/import', $strfoo)
+    		);
+    		if ($PAGE->url->compare($url, URL_MATCH_BASE)) {
+    			$foonode->make_active();
+    		}
+    		$settingnode->add_node($foonode);
+    	}
+    	
     	//echo "test";
     	// If not in a course context, then leave
        /*
     	if ($context == null || $context->contextlevel != CONTEXT_COURSE) {
     		return;
     	}*/
-    	$courseadmin_node = $navigation->get('courseadmin');
+    	//$courseadmin_node = $navigation->get('courseadmin');
     	//$courseadmin_node->add('test');
     
     	// When on front page there is 'frontpagesettings' node, other
     	// courses will have 'courseadmin' node
+    	/*
     	if (null == ($courseadmin_node = $navigation->get('courseadmin'))) {
     		// Keeps us off the front page
     		return;
