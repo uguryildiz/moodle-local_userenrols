@@ -65,7 +65,7 @@
     	}*/
     	
     	// Only let users with the appropriate capability see this settings item.
-    	$settingnode = $navigation->get('users', navigation_node::TYPE_SETTING);
+    	$settingnode = $navigation->get('users');
     	print_r($settingnode);
     	//echo $navigation->page->context->instanceid;
     	//$settingnode->add_node('test');
