@@ -412,7 +412,7 @@
 	                
 	
 	                $user_id_value  = $matches[0];
-	                $group_name     = isset($matches[8]) ? $matches[8] : '';
+	                $group_name     = isset($matches[8]) ? mb_convert_encoding($matches[8], "UTF-8", "ISO-8859-9") : '';
 	                $firstname = $matches[2];
 	                $lastname = $matches[3];
 	
