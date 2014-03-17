@@ -63,13 +63,14 @@
      * @return void
      */
     
-    function userenrols_extends_settings_navigation(settings_navigation $navigation, $context)
+    function local_userenrols_extends_settings_navigation(settings_navigation $navigation, $context)
     {	
 
         // If not in a course context, then leave
-        if ($context == null || $context->contextlevel != CONTEXT_COURSE) {
+        /*
+    	if ($context == null || $context->contextlevel != CONTEXT_COURSE) {
             return;
-        }
+        }*/
 
         // When on front page there is 'frontpagesettings' node, other
         // courses will have 'courseadmin' node
