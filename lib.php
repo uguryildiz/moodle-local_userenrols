@@ -62,7 +62,7 @@
     		return;
     	}*/
     	$courseadmin_node = $navigation->get('courseadmin');
-    	$courseadmin_node->add('test');
+    	//$courseadmin_node->add('test');
     
     	// When on front page there is 'frontpagesettings' node, other
     	// courses will have 'courseadmin' node
